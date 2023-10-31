@@ -26,14 +26,14 @@ export default function HomePage() {
                 {users?.map((user) => (
                     <div key={user?.id} className="flex justify-between w-full group text-white border-b-[1px] py-4 border-white/10">
                         <div className="flex gap-x-6">
-                            {isValidAvatar(user.avatar) ? (
-                                <img src={user.avatar} alt={user.nome} className="w-24 h-24 rounded-full object-cover border-4 border-white group-hover:border-green-500 transition-colors" />
+                            {isValidAvatar(user?.avatar) ? (
+                                <img src={user?.avatar} alt={user?.nome} className="w-24 h-24 rounded-full object-cover border-4 border-white group-hover:border-green-500 transition-colors" />
                             ) : (
                                 <div className="flex items-center text-center w-24 h-24 rounded-full bg-gray-500 border-4 border-white group-hover:border-green-500 transition-colors">Sem imagem</div>
                             )}
                             <div className="flex flex-col">
-                                <h2 className="text-xl font-light">{user.nome}</h2>
-                                <DateAndHour dateTime={user.dh_registro} />
+                                <h2 className="text-xl font-light">{user?.nome}</h2>
+                                <DateAndHour dateTime={user?.dh_registro} />
                             </div>
                         </div>
                         <div>
