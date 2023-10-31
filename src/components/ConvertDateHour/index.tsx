@@ -1,24 +1,25 @@
 import React from 'react';
 
-function ConvertDateHour(dataHora: Date): string {
-    const dia = dataHora.getDate().toString().padStart(2, '0');
-    const mes = (dataHora.getMonth() + 1).toString().padStart(2, '0');
-    const ano = dataHora.getFullYear();
-    const hora = dataHora.getHours().toString().padStart(2, '0');
-    const minutos = dataHora.getMinutes().toString().padStart(2, '0');
-    const segundos = dataHora.getSeconds().toString().padStart(2, '0');
+function formatBrazilianDateTime(dateTime: Date): string {
+    const day = dateTime.getDate().toString().padStart(2, '0');
+    const month = (dateTime.getMonth() + 1).toString().padStart(2, '0'); // Month starts at 0
+    const year = dateTime.getFullYear();
+    const hour = dateTime.getHours().toString().padStart(2, '0');
+    const minutes = dateTime.getMinutes().toString().padStart(2, '0');
+    const seconds = dateTime.getSeconds().toString().padStart(2, '0');
 
-    return `${dia}/${mes}/${ano} ${hora}:${minutos}:${segundos}`;
+    return `${day}/${month}/${year} ${hour}:${minutes}:${seconds}`;
 }
 
-interface DateAndHourProps {
-    dataHora: Date;
+interface BrazilianDateTimeProps {
+    dateTime: string;
 }
 
-const DateAndHour: React.FC<DateAndHourProps> = ({ dataHora }) => {
-    const formattedDateAndHour = ConvertDateHour(dataHora);
+const BrazilianDateTime: React.FC<BrazilianDateTimeProps> = ({ dateTime }) => {
+    const dateTimeObj = new Date(dateTime);
+    const formattedDateTime = formatBrazilianDateTime(dateTimeObj);
 
-    return <span>{formattedDateAndHour}</span>;
+    return <span>{formattedDateTime}</span>;
 }
 
-export default DateAndHour;
+export default BrazilianDateTime;
