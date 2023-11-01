@@ -2,7 +2,7 @@ import React from 'react';
 
 function formatBrazilianDateTime(dateTime: Date): string {
     const day = dateTime.getDate().toString().padStart(2, '0');
-    const month = (dateTime.getMonth() + 1).toString().padStart(2, '0'); // Month starts at 0
+    const month = (dateTime.getMonth() + 1).toString().padStart(2, '0');
     const year = dateTime.getFullYear();
     const hour = dateTime.getHours().toString().padStart(2, '0');
     const minutes = dateTime.getMinutes().toString().padStart(2, '0');

@@ -4,27 +4,38 @@ import DateAndHour from "../../components/ConvertDateHour"
 import EditUserModal from "../../components/EditUserModal"
 import { Pencil, X } from "lucide-react"
 import DeleteUserModal from "../../components/DeleteUserModal"
+import CreateUserModal from "../../components/CreateUserModal"
 
 export default function HomePage() {
     const { users, getUsers } = useCrud();
-    const [editModalUserId, setEditModalUserId] = useState<string | null>(null);
-    const [deleteModalUserId, setDeleteModalUserId] = useState<string | null>(null);
+    const [createModalUser, setCreateModal] = useState<boolean>(false);
+    const [editModalUser, setEditModalUser] = useState<string | null>(null);
+    const [deleteModalUser, setDeleteModalUser] = useState<string | null>(null);
 
     useEffect(() => {
         getUsers();
     }, [getUsers]);
+
+
+    const handleCreateUserClick = () => {
+        setCreateModal(true)
+    }
+
+    const handleCreateUserModalClose = () => {
+        setCreateModal(false)
+    }
 
     const handleEditUserClick = (userId: string | undefined) => {
         if (!userId) {
             return
         }
 
-        setEditModalUserId(userId);
+        setEditModalUser(userId);
 
     };
 
     const handleEditUserModalClose = () => {
-        setEditModalUserId(null);
+        setEditModalUser(null);
     };
 
     const handleDeleteUserClick = (userId: string | undefined) => {
@@ -32,12 +43,12 @@ export default function HomePage() {
             return
         }
 
-        setDeleteModalUserId(userId);
+        setDeleteModalUser(userId);
 
     };
 
     const handleDeleteUserModalClose = () => {
-        setDeleteModalUserId(null);
+        setDeleteModalUser(null);
     };
 
 
@@ -56,7 +67,12 @@ export default function HomePage() {
                 <div className="max-w-2xl mx-auto w-full flex flex-col">
                     <div className="flex justify-between items-center">
                         <h1 className="text-white text-xl">User list</h1>
-                        <button type="button" className="w-fit ml-auto mb-4 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700">Create User</button>
+                        <button onClick={handleCreateUserClick} type="button" className="w-fit ml-auto mb-4 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700">Create User</button>
+                        {createModalUser ? (
+                            <CreateUserModal isModalOpen={createModalUser} closeModal={handleCreateUserModalClose} />
+                        ) : (
+                            undefined
+                        )}
                     </div>
                     <div className="w-full h-[1px] bg-white/10"></div>
                     {users?.map((user) => (
@@ -81,7 +97,7 @@ export default function HomePage() {
                                     className="focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border text-sm font-medium p-2.5 focus:z-10 bg-gray-700 text-gray-300 border-gray-500 hover:text-white hover:bg-gray-600">
                                     <X size={16} />
                                 </button>
-                                {user.id === editModalUserId && (
+                                {user.id === editModalUser && (
                                     <EditUserModal
                                         user={user}
                                         isModalOpen={true}
@@ -89,7 +105,7 @@ export default function HomePage() {
                                     />
                                 )}
 
-                                {user.id === deleteModalUserId && (
+                                {user.id === deleteModalUser && (
                                     <DeleteUserModal
                                         user={user}
                                         isModalOpen={true}
