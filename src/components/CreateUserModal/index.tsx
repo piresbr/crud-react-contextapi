@@ -12,7 +12,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({
     closeModal,
     isModalOpen,
 }) => {
-    const { createUser, getUsers } = useCrud()
+    const { createUser } = useCrud()
     const { register, handleSubmit } = useForm<IUser>()
 
 
