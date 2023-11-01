@@ -1,3 +1,4 @@
+import { Calendar } from 'lucide-react';
 import React from 'react';
 
 function formatBrazilianDateTime(dateTime: Date): string {
@@ -19,7 +20,7 @@ const BrazilianDateTime: React.FC<BrazilianDateTimeProps> = ({ dateTime }) => {
     const dateTimeObj = new Date(dateTime);
     const formattedDateTime = formatBrazilianDateTime(dateTimeObj);
 
-    return <span>{formattedDateTime}</span>;
+    return <span className='inline-flex text-sm font-extralight'><Calendar size={18} className='mr-1' /> {formattedDateTime}</span>;
 }
 
 export default BrazilianDateTime;

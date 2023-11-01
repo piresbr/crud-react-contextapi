@@ -19,7 +19,6 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ closeModal, isModalOpen, 
         setValue("avatar", user?.avatar)
     }, [setValue, user?.nome, user?.avatar])
 
-
     const onSubmit = handleSubmit(async (dataForm) => {
         try {
 

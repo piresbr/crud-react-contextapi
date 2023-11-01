@@ -19,10 +19,12 @@ export default function HomePage() {
 
     const handleCreateUserClick = () => {
         setCreateModal(true)
+        document.body.classList.add("overflow-hidden");
     }
 
     const handleCreateUserModalClose = () => {
         setCreateModal(false)
+        document.body.classList.remove("overflow-hidden");
     }
 
     const handleEditUserClick = (userId: string | undefined) => {
@@ -31,11 +33,13 @@ export default function HomePage() {
         }
 
         setEditModalUser(userId);
+        document.body.classList.add("overflow-hidden");
 
     };
 
     const handleEditUserModalClose = () => {
         setEditModalUser(null);
+        document.body.classList.remove("overflow-hidden");
     };
 
     const handleDeleteUserClick = (userId: string | undefined) => {
@@ -44,11 +48,13 @@ export default function HomePage() {
         }
 
         setDeleteModalUser(userId);
+        document.body.classList.add("overflow-hidden");
 
     };
 
     const handleDeleteUserModalClose = () => {
         setDeleteModalUser(null);
+        document.body.classList.remove("overflow-hidden");
     };
 
 
@@ -66,7 +72,7 @@ export default function HomePage() {
             <section className="flex flex-col min-h-screen bg-gray-950 p-6">
                 <div className="max-w-2xl mx-auto w-full flex flex-col">
                     <div className="flex justify-between items-center">
-                        <h1 className="text-white text-xl">User list</h1>
+                        <h1 className="text-white text-2xl font-semibold">User list</h1>
                         <button onClick={handleCreateUserClick} type="button" className="w-fit ml-auto mb-4 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700">Create User</button>
                         {createModalUser ? (
                             <CreateUserModal isModalOpen={createModalUser} closeModal={handleCreateUserModalClose} />
@@ -83,18 +89,18 @@ export default function HomePage() {
                                 ) : (
                                     <div className="flex items-center text-center w-24 h-24 rounded-full bg-gray-500 border-4 border-white group-hover:border-green-500 transition-colors">Sem imagem</div>
                                 )}
-                                <div className="flex flex-col">
-                                    <h2 className="text-xl font-light">{user?.nome}</h2>
+                                <div className="flex flex-col gap-2 lg:self-center">
+                                    <h2 className="text-lg">{user?.nome}</h2>
                                     <DateAndHour dateTime={user?.dh_registro} />
                                 </div>
                             </div>
-                            <div className="flex gap-2 h-fit">
+                            <div className="flex gap-2 h-fit lg:self-center">
                                 <button onClick={() => handleEditUserClick(user.id)}
-                                    className="focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border text-sm font-medium p-2.5 focus:z-10 bg-gray-700 text-gray-300 border-gray-500 hover:text-white hover:bg-gray-600">
+                                    className="focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border text-sm font-medium p-2 focus:z-10 bg-gray-700 text-gray-300 border-gray-500 hover:text-white hover:bg-gray-600">
                                     <Pencil size={16} />
                                 </button>
                                 <button onClick={() => handleDeleteUserClick(user.id)}
-                                    className="focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border text-sm font-medium p-2.5 focus:z-10 bg-gray-700 text-gray-300 border-gray-500 hover:text-white hover:bg-gray-600">
+                                    className="focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border text-sm font-medium p-2 focus:z-10 bg-gray-700 text-gray-300 border-gray-500 hover:text-white hover:bg-gray-600">
                                     <X size={16} />
                                 </button>
                                 {user.id === editModalUser && (
