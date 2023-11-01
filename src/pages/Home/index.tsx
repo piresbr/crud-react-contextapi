@@ -12,8 +12,13 @@ export default function HomePage() {
         getUsers();
     }, [getUsers]);
 
-    const handleEditUserClick = (userId: string) => {
+    const handleEditUserClick = (userId: string | undefined) => {
+        if (!userId) {
+            return
+        }
+
         setEditModalUserId(userId);
+
     };
 
     const handleEditUserModalClose = () => {

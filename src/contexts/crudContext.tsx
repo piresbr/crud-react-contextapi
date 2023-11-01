@@ -1,6 +1,6 @@
 import React, { ReactNode, createContext, useCallback, useContext, useState } from 'react';
 import { CrudContextData } from '../types/Contexts/crudTypes';
-import { IUser } from '../types/Users';
+import { IUpdateUser, IUser } from '../types/Users';
 import { api } from '../services/axios-config';
 import { toast } from 'react-toastify';
 
@@ -13,25 +13,47 @@ interface CrudContextProps {
 
 export const CrudProvider: React.FC<CrudContextProps> = ({ children }) => {
     const [users, setUsers] = useState<IUser[]>([])
-    // const [userId, setUserId] = useState<IUser>()
 
 
     const getUsers = useCallback(async () => {
         try {
             const response = await api.get('/users')
+            // console.log(response.data)
             setUsers(response.data)
         } catch (error) {
             toast.error(`Oops, ocorreu um erro. Tente novamente! `, {});
         }
     }, [])
 
-    const createUser = useCallback(async () => {
+
+    const createUser = useCallback(async (formData: IUser) => {
         try {
-            const response = await api.post('/users')
+            await api.post('/users', formData)
         } catch (error) {
             toast.error(`Oops, ocorreu um erro. Tente novamente! `, {});
         }
     }, [])
+
+
+    const updateUser = useCallback(async (id: string, formData: IUpdateUser) => {
+        try {
+            await api.put(`/users/${id}`, formData)
+            await getUsers()
+        } catch (error) {
+            toast.error(`Oops, ocorreu um erro. Tente novamente! `, {});
+        }
+    }, [getUsers])
+
+
+    const deleteUser = useCallback(async (id: string) => {
+        try {
+            await api.delete(`/users/${id}`)
+
+            await getUsers()
+        } catch (error) {
+            toast.error(`Oops, ocorreu um erro. Tente novamente! `, {});
+        }
+    }, [getUsers])
 
 
 
@@ -39,11 +61,9 @@ export const CrudProvider: React.FC<CrudContextProps> = ({ children }) => {
         <CrudContext.Provider value={{
             getUsers,
             createUser,
-            // updateUser,
-            // getUserById,
-            // deleteUser,
+            updateUser,
+            deleteUser,
             users,
-            // userId,
         }}>
             {children}
         </CrudContext.Provider>

@@ -1,31 +1,65 @@
 import React, { useEffect, useRef } from 'react';
-import { IUser, UsersModalProps } from '../../types/Users';
+import { IUpdateUser, IUser, UsersModalProps } from '../../types/Users';
 import { XCircle } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { useCrud } from '../../contexts/crudContext';
+import { toast } from 'react-toastify';
 
 interface EditUserModalProps extends UsersModalProps {
     user: IUser;
 }
 
 
-const EditUserModal: React.FC<EditUserModalProps> = ({
-    closeModal,
-    isModalOpen,
-    user,
-}) => {
-    console.log(user)
-
-    const nameRef = useRef<HTMLInputElement | null>(null);
-    const avatarRef = useRef<HTMLInputElement | null>(null);
+const EditUserModal: React.FC<EditUserModalProps> = ({ closeModal, isModalOpen, user, }) => {
+    const { updateUser } = useCrud()
+    const { register, handleSubmit, setValue } = useForm<IUpdateUser>()
 
     useEffect(() => {
-        if (nameRef.current) {
-            nameRef.current.value = user.nome
-        }
-        if (avatarRef.current) {
-            avatarRef.current.value = user.avatar
-        }
-    }, [user.avatar, user.nome])
+        setValue("nome", user?.nome)
+        setValue("avatar", user?.avatar)
+    }, [setValue, user?.nome, user?.avatar])
 
+
+    const onSubmit = handleSubmit(async (dataForm) => {
+        try {
+
+            const userData: IUpdateUser = {
+                nome: user.nome,
+                avatar: user.avatar,
+                dh_registro: user.dh_registro
+            }
+
+            if (!user.id) {
+                return
+            }
+
+            if (dataForm.nome.length === 0 || dataForm.avatar.length === 0) {
+                toast.error(`Os campos não podem ser vazios`, {});
+                return
+            }
+
+            if (dataForm.nome !== user?.nome) {
+                userData.nome = dataForm.nome
+            }
+
+            if (dataForm.avatar !== user?.avatar) {
+                userData.avatar = dataForm.avatar
+            }
+
+            if (dataForm.dh_registro !== user.dh_registro) {
+                const date = new Date()
+                const dateIso = date.toISOString()
+
+                userData.dh_registro = dateIso
+            }
+
+            await updateUser(user?.id, userData)
+            closeModal()
+
+        } catch (err) {
+            toast.error(`Ops, aconteceu algum erro inesperado. Tente novamente mais tarde! `, {});
+        }
+    })
 
     return (
         <div className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black/10">
@@ -40,9 +74,9 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
                         </button>
                     </div>
 
-                    <form className="w-full p-6 space-y-6">
-                        <input type="text" ref={nameRef} placeholder="Nome: " name="nome" className='w-full py-1 px-3 rounded-md bg-transparent border border-gray-200/50 focus:border-blue-500 focus:outline-none transition-colors' />
-                        <input type="text" ref={avatarRef} placeholder="Link do avatar: " name="avatar" className='w-full py-1 px-3 rounded-md bg-transparent border border-gray-200/50 focus:border-blue-500 focus:outline-none transition-colors' />
+                    <form onSubmit={onSubmit} className="w-full p-6 space-y-6">
+                        <input type="text" {...register("nome")} placeholder="Nome: " name="nome" className='w-full py-1 px-3 rounded-md bg-transparent border border-gray-200/50 focus:border-blue-500 focus:outline-none transition-colors' />
+                        <input type="text" {...register("avatar")} placeholder="Link do avatar: " name="avatar" className='w-full py-1 px-3 rounded-md bg-transparent border border-gray-200/50 focus:border-blue-500 focus:outline-none transition-colors' />
 
                         <div className="flex items-center justify-end py-6 space-x-2 border-t rounded-b border-gray-600">
                             <button type="button" onClick={closeModal} className="focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border text-sm font-medium px-5 py-2.5 focus:z-10 bg-gray-700 text-gray-300 border-gray-500 hover:text-white hover:bg-gray-600">Cancel</button>

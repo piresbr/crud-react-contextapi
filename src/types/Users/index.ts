@@ -2,7 +2,14 @@ export interface IUser {
     dh_registro: string
     nome: string
     avatar: string
-    id: string
+    id?: string
+}
+
+export interface IUpdateUser {
+    dh_registro: string
+    nome: string
+    avatar: string
+    id?: string
 }
 
 export interface UsersModalProps {
