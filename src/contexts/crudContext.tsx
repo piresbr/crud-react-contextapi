@@ -2,10 +2,9 @@ import React, { ReactNode, createContext, useCallback, useContext, useState } fr
 
 import { api } from '../services/axios-config';
 import { toast } from 'react-toastify';
-import { CrudContextData } from '@/types/Context/crudTypes';
-import { IUpdateUser, IUser } from '@/types/Users';
 
-
+import { IUpdateUser, IUser } from '@/types/userTypes';
+import { CrudContextData } from '@/types/crudTypes';
 const CrudContext = createContext({} as CrudContextData)
 
 interface CrudContextProps {
