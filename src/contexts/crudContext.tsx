@@ -38,6 +38,7 @@ export const CrudProvider: React.FC<CrudContextProps> = ({ children }) => {
     const updateUser = useCallback(async (id: string, formData: IUpdateUser) => {
         try {
             await api.put(`/users/${id}`, formData)
+            toast.success('Usuário editado com sucesso! ')
             await getUsers()
         } catch (error) {
             toast.error(`Oops, ocorreu um erro. Tente novamente! `, {});
@@ -48,13 +49,12 @@ export const CrudProvider: React.FC<CrudContextProps> = ({ children }) => {
     const deleteUser = useCallback(async (id: string) => {
         try {
             await api.delete(`/users/${id}`)
-
+            toast.success('Usuário excluído com sucesso! ')
             await getUsers()
         } catch (error) {
             toast.error(`Oops, ocorreu um erro. Tente novamente! `, {});
         }
     }, [getUsers])
-
 
 
     return (

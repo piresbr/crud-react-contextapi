@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { IUpdateUser, IUser, UsersModalProps } from '../../types/Users';
 import { XCircle } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -62,7 +62,7 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ closeModal, isModalOpen, 
     })
 
     return (
-        <div className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black/10">
+        <div className="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black/50">
             <div className="flex items-center relative w-full max-w-2xl mx-auto h-full">
                 <div className="relative w-full rounded-lg shadow bg-gray-700">
                     <div className="flex items-start justify-between p-4 border-b rounded-t border-gray-600">
