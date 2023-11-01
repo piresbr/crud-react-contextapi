@@ -1,5 +1,5 @@
 import React from 'react';
-import { IUpdateUser, IUser, UsersModalProps } from '../../types/users';
+import { IUpdateUser, IUser, UsersModalProps } from '../../types/Users';
 import { XCircle } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { useCrud } from '../../contexts/crudContext';

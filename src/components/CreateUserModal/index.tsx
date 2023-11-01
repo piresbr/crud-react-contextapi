@@ -3,7 +3,7 @@ import { XCircle } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { useCrud } from '../../contexts/crudContext';
 import { toast } from 'react-toastify';
-import { IUser, UsersModalProps } from '@/types/users';
+import { IUser, UsersModalProps } from '@/types/Users';
 
 interface CreateUserModalProps extends UsersModalProps {
 }

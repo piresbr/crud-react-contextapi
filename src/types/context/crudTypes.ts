@@ -1,4 +1,4 @@
-import { IUser } from "../users";
+import { IUser } from "../Users";
 
 export interface CrudContextData {
     getUsers: () => Promise<void>;

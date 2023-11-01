@@ -1,8 +1,9 @@
 import React, { ReactNode, createContext, useCallback, useContext, useState } from 'react';
-import { CrudContextData } from '../types/context/crudTypes';
-import { IUpdateUser, IUser } from '../types/users';
+
 import { api } from '../services/axios-config';
 import { toast } from 'react-toastify';
+import { CrudContextData } from '@/types/Context/crudTypes';
+import { IUpdateUser, IUser } from '@/types/Users';
 
 
 const CrudContext = createContext({} as CrudContextData)
