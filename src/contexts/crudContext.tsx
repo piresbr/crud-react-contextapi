@@ -18,7 +18,6 @@ export const CrudProvider: React.FC<CrudContextProps> = ({ children }) => {
     const getUsers = useCallback(async () => {
         try {
             const response = await api.get('/users')
-            console.log(response.data)
             setUsers(response.data)
         } catch (error) {
 

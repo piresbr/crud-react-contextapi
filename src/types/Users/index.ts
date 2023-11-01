@@ -5,4 +5,7 @@ export interface IUser {
     id: string
 }
 
-
+export interface UsersModalProps {
+    isModalOpen: boolean;
+    closeModal: () => void;
+}
