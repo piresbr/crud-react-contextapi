@@ -1,9 +1,9 @@
 import React from 'react';
-import { IUser, UsersModalProps } from '../../types/users';
 import { XCircle } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { useCrud } from '../../contexts/crudContext';
 import { toast } from 'react-toastify';
+import { IUser, UsersModalProps } from '../../types/users';
 
 interface CreateUserModalProps extends UsersModalProps {
 }
