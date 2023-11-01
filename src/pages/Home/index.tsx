@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react"
 import { useCrud } from "../../contexts/crudContext"
 import DateAndHour from "../../components/ConvertDateHour"
 import EditUserModal from "../../components/EditUserModal"
-import { Pencil, X } from "lucide-react"
 import DeleteUserModal from "../../components/DeleteUserModal"
 import CreateUserModal from "../../components/CreateUserModal"
+import { Pencil, X } from "lucide-react"
 
 export default function HomePage() {
     const { users, getUsers } = useCrud();
@@ -76,8 +76,8 @@ export default function HomePage() {
                     </div>
                     <div className="w-full h-[1px] bg-white/10"></div>
                     {users?.map((user) => (
-                        <div key={user?.id} className="flex justify-between w-full group text-white border-b-[1px] py-4 border-white/10">
-                            <div className="flex gap-x-6">
+                        <div key={user?.id} className="flex justify-between w-full gap-x-4 group text-white border-b-[1px] py-4 border-white/10">
+                            <div className="flex gap-x-4">
                                 {isValidAvatar(user?.avatar) ? (
                                     <img src={user?.avatar} alt={user?.nome} className="w-24 h-24 rounded-full object-cover border-4 border-white group-hover:border-green-500 transition-colors" />
                                 ) : (
