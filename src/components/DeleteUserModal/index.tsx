@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { IUpdateUser, IUser, UsersModalProps } from '../../types/Users';
 import { XCircle } from 'lucide-react';
 import { useForm } from 'react-hook-form';

@@ -1,4 +1,4 @@
-import { Route, Router, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { CrudProvider } from './contexts/crudContext';
 import HomePage from './pages/Home';
