@@ -2,6 +2,7 @@ import React, { ReactNode, createContext, useCallback, useContext, useState } fr
 import { CrudContextData } from '../types/Contexts/crudTypes';
 import { IUser } from '../types/Users';
 import { api } from '../services/axios-config';
+import { toast } from 'react-toastify';
 
 
 const CrudContext = createContext({} as CrudContextData)
@@ -20,10 +21,15 @@ export const CrudProvider: React.FC<CrudContextProps> = ({ children }) => {
             const response = await api.get('/users')
             setUsers(response.data)
         } catch (error) {
+            toast.error(`Oops, ocorreu um erro. Tente novamente! `, {});
+        }
+    }, [])
 
-        } finally {
-
-
+    const createUser = useCallback(async () => {
+        try {
+            const response = await api.post('/users')
+        } catch (error) {
+            toast.error(`Oops, ocorreu um erro. Tente novamente! `, {});
         }
     }, [])
 
@@ -32,7 +38,7 @@ export const CrudProvider: React.FC<CrudContextProps> = ({ children }) => {
     return (
         <CrudContext.Provider value={{
             getUsers,
-            // createUser,
+            createUser,
             // updateUser,
             // getUserById,
             // deleteUser,
